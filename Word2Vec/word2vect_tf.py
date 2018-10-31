@@ -7,7 +7,7 @@ import argparse
 import numpy as np
 import tensorflow as tf
 
-import utils.my_io as my_io
+import utils.my_utils as my_io
 
 data_index = 0
 

@@ -3,7 +3,9 @@
 import sys
 import os
 import urllib
+import cv2
 from PIL import Image
+import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 
@@ -36,10 +38,29 @@ def is_image(file_path, use_extention=True, image_type=None, use_pil=False):
     return result
 
 
-def load_image(img_path, target_size=None):
-    img = image.load_img(img_path, target_size=target_size)
-    x = image.img_to_array(img)
-    return x
+def read_image(img_path, show=False, to_rgb=True, target_size=None):
+    img = cv2.imread(img_path, cv2.IMREAD_COLOR)
+    if target_size:
+        img = cv2.resize(img, target_size)
+
+    # img = image.load_img(img_path, target_size=target_size)
+    # x = image.img_to_array(img)
+
+    if to_rgb:
+        b, g, r = cv2.split(img)
+        img = cv2.merge([r, g, b])
+        if show:
+            img_name = os.path.basename(img_path)
+            show_image(img, img_name)
+
+    return img
+
+
+def show_image(image, image_name=None):
+    plt.imshow(image)
+    if image_name:
+        plt.title(image_name)
+    plt.show()
 
 
 def read_text_file(file_name):
@@ -53,6 +74,7 @@ def read_text_file(file_name):
 def read_traslation_corpus(filename):
     with tf.gfile.GFile(filename, "r") as f:
         return f.read().decode("utf-8").split('\n')
+
 
 
 if __name__ == '__main__':

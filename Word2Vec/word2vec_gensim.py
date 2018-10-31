@@ -4,7 +4,7 @@ import collections
 
 from gensim.models import word2vec
 
-import utils.my_io as my_io
+import utils.my_utils as my_io
 
 
 def build_dataset(words, n_words):
