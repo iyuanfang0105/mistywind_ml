@@ -1,9 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 .idea
+.mat
 
 Seq2Seq/log
 Seq2Seq/weights
 test_data
 ImageStyle/vgg_weights
-
